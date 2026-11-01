@@ -231,11 +231,13 @@
   --lq-color-up: #2e9e5b;
   --lq-color-down: #c4213a;
 
+  /* Les six couleurs de séries des graphiques (accent, green, amber, sky, rose, violet, dans cet
+     ordre) doivent rester distinctes : le sarcelle et le marine sont ceux des pastilles du CV. */
   --lq-color-amber: #f2b705;
-  --lq-color-sky: #3a41e2;
+  --lq-color-sky: #0e7c86;
   --lq-color-green: #2e9e5b;
   --lq-color-rose: #c4213a;
-  --lq-color-violet: #6b70f0;
+  --lq-color-violet: #17324d;
 
   /* Le CV flotte sur son fond avec une ombre large et douce ; les cartes, plus nombreuses, n'en
      gardent qu'un souffle, et les modales l'ombre entière. */
@@ -315,10 +317,10 @@
   --lq-color-down: #ef6b7b;
 
   --lq-color-amber: #f2c94c;
-  --lq-color-sky: #9ba0ff;
+  --lq-color-sky: #3fb8c2;
   --lq-color-green: #4cc38a;
   --lq-color-rose: #ef6b7b;
-  --lq-color-violet: #a5a9ff;
+  --lq-color-violet: #d6d8f0;
 
   --lq-tone-accent: #5b61ea;
   --lq-tone-info: #23274a;
