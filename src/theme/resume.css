@@ -1,0 +1,424 @@
+/* Le thème « resume » : le langage visuel du CV de Michael, écrit entièrement en variables.
+ *
+ * ## Ce que ce fichier est
+ *
+ * Il ne contient aucune règle de mise en forme sur un composant nommé — rien que des redéfinitions
+ * des variables `--lq-*` que le kit lit (celles de son `tokens.css`, et les variables optionnelles
+ * listées à la fin de ce fichier). Aucun composant du kit n'écrit de couleur, de rayon ni
+ * d'espacement en dur : les redéfinir ici rhabille les ~220 composants d'un coup.
+ *
+ * ## Pourquoi ces sélecteurs-là
+ *
+ * Le kit pose ses couleurs sur `.lq-root[data-lq-palette="…"][data-lq-surface="…"]` (0,3,0) et son
+ * échelle sur `.lq-root` (0,1,0). Pour gagner **quel que soit l'ordre des imports**, il faut être
+ * strictement plus spécifique :
+ *
+ *   `.rdk.lq-root[data-lq-palette][data-lq-surface="light"]`  → (0,4,0) contre (0,3,0)
+ *   `.rdk.lq-root`                                            → (0,2,0) contre (0,1,0)
+ *
+ * ## L'intention esthétique
+ *
+ * Le CV (`../my-resume`, site et PDF A4) : un bleu électrique `#3a41e2` qui porte tout — le nom en
+ * League Spartan 87 px, la colonne de gauche pleine où le texte passe en blanc, le filet de 4 px sous
+ * le titre — sur un papier gris clair `#ebebeb`, le corps en **Space Mono**, une chasse fixe qui
+ * donne au document son air de fiche technique. Aucun arrondi. Les intitulés (postes, sections,
+ * groupes de technologies) en League Spartan grasse, souvent en capitales.
+ *
+ * Les valeurs sont celles des variables du site du CV (`my-resume-front/src/styles.css` et
+ * `cv/Resume.module.css`) : encre `#1b1d3a`, gris `#6b6f8a`, surface `#ffffff`, papier `#ebebeb` ;
+ * et sa version nuit : bleu `#7c82ff`, encre `#e4e6f5`, gris `#9a9ec0`, surface `#181b36`,
+ * papier `#14172e`.
+ */
+
+/* ---- l'échelle, commune aux deux surfaces ---- */
+
+.rdk.lq-root {
+  /* Le kit pose `--lq-font-family: var(--lq-font-inter)` en style en ligne (prop `font`) : c'est
+     cette pile qu'il faut redéfinir pour que la nôtre gagne. Le corps du CV est en Space Mono. */
+  --lq-font-inter: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --lq-font-family: var(--lq-font-inter);
+  --lq-font-mono: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  /* La seconde voix : League Spartan, celle du nom et des intitulés. */
+  --rdk-font-title: "League Spartan", "Helvetica Neue", Arial, sans-serif;
+  --lq-heading-font: var(--rdk-font-title);
+
+  /* Le CV n'a aucun arrondi : ni ses colonnes, ni ses filets, ni ses boutons. */
+  --lq-radius-sm: 0px;
+  --lq-radius-md: 0px;
+  --lq-radius-lg: 0px;
+  --lq-radius-pill: 0px;
+
+  --lq-space-1: 4px;
+  --lq-space-2: 8px;
+  --lq-space-3: 12px;
+  --lq-space-4: 16px;
+  --lq-space-5: 22px;
+  --lq-space-6: 32px;
+
+  /* La chasse fixe est large : le corps descend à 13 px, comme les lignes du CV (11 à 13 px). Les
+     titres reprennent ses intitulés — section en 27 px, poste en 18 px. */
+  --lq-text-h1: 3.25rem;
+  --lq-text-h2: 2.25rem;
+  --lq-text-h3: 1.6875rem;
+  --lq-text-h4: 1.375rem;
+  --lq-text-h5: 1.125rem;
+  --lq-text-h6: 0.875rem;
+
+  --lq-text-xs: 0.6875rem;
+  --lq-text-sm: 0.75rem;
+  --lq-text-md: 0.8125rem;
+  --lq-text-lg: 0.9375rem;
+  --lq-text-xl: 1.125rem;
+
+  --lq-line-height-body: 1.55;
+  --lq-line-height-heading: 1;
+
+  /* Space Mono n'a que deux graisses, 400 et 700 ; League Spartan grasse porte les titres. */
+  --lq-font-weight-heading: 700;
+  --lq-font-weight-heavy: 700;
+  --lq-font-weight-bold: 700;
+  --lq-font-weight-semibold: 700;
+  --lq-font-weight-medium: 400;
+
+  /* Les petits titres (en-têtes de tableau, étiquettes) : League Spartan 700 en capitales, comme
+     « BACKEND », « CODE QUALITY / TEST » dans la colonne bleue. Les titres de carte, plus grands,
+     reprennent les intitulés de poste (« DEVELOPPER », « TECH LEADER »). */
+  --lq-label-font: var(--rdk-font-title);
+  --lq-label-size: 0.8125rem;
+  --lq-label-weight: 700;
+  --lq-label-tracking: 0.02em;
+
+  --lq-caption-font: var(--rdk-font-title);
+  --lq-caption-size: 1rem;
+  --lq-caption-weight: 700;
+  --lq-caption-tracking: 0.01em;
+  --lq-caption-transform: uppercase;
+
+  /* Champs et boutons : le filet de 1,5 px du site du CV, angles droits, 36 px de haut. */
+  --lq-control-border-width: 1.5px;
+  --lq-button-padding-y: 7px;
+  --lq-button-padding-x: 16px;
+  --lq-button-font-size: 0.8125rem;
+
+  --lq-control-height: 36px;
+  --lq-control-padding-x: 10px;
+  --lq-control-font-size: 0.8125rem;
+  --lq-field-gap: 6px;
+  --lq-field-helper-offset: 2px;
+  --lq-field-label-size: 0.75rem;
+  --lq-field-label-weight: 700;
+
+  --lq-sidebar-z-index: 1950;
+  --lq-alloc-bar-border: none;
+
+  /* Les tuiles pleines : le bleu du CV d'abord, puis une famille sobre qui ne le concurrence pas. */
+  --lq-tone-accent: #3a41e2;
+  --lq-tone-success: #2e9e5b;
+  --lq-tone-info: #1c1f5c;
+  --lq-tone-danger: #c4213a;
+  --lq-tone-warning: #f2b705;
+  --lq-tone-warning-text: #1b1d3a;
+  --lq-tone-dark: #1b1d3a;
+  --lq-tile-padding: 24px;
+  --lq-tile-title-size: 1.6875rem;
+  --lq-tile-title-weight: 700;
+  --lq-dot-map-marker: #3a41e2;
+  --lq-dot-map-marker-ring: 0px;
+
+  --lq-row-font-size: 0.75rem;
+
+  /* Tableaux : en-têtes en bleu, comme les « Skills: » du CV ; pagination en carrés. */
+  --lq-table-cell-padding-y: 12px;
+  --lq-table-cell-padding-x: 14px;
+  --lq-table-condensed-padding-y: 7px;
+  --lq-table-head-padding-y: 10px;
+  --lq-table-head-padding-x: 14px;
+  --lq-table-head-color: var(--lq-color-accent);
+  --lq-table-page-font-size: 0.75rem;
+  --lq-table-page-current-weight: 700;
+
+  /* ---- les composants ajoutés au kit (v0.186) ---- */
+
+  --lq-radio-size: 16px;
+  --lq-radio-checked-border-width: 5px;
+  --lq-radio-dot-size: 0px;
+  --lq-radio-label-size: 0.8125rem;
+
+  --lq-slider-track-size: 4px;
+  --lq-slider-track-radius: 0;
+  --lq-slider-thumb-size: 16px;
+  --lq-slider-bubble-size: 0.6875rem;
+  --lq-slider-mark-size: 0.6875rem;
+
+  --lq-tree-row-height: 26px;
+  --lq-tree-indent: 16px;
+  --lq-tree-font-size: 0.75rem;
+  --lq-tree-folder-weight: 700;
+
+  /* Frise : le filet bleu du CV pour relier les jalons. */
+  --lq-timeline-line-width: 4px;
+  --lq-timeline-marker-size: 36px;
+  --lq-timeline-date-size: 0.6875rem;
+  --lq-activity-name-weight: 700;
+
+  --lq-gallery-gap: 10px;
+  --lq-gallery-radius: 0;
+  --lq-gallery-scrim: rgba(27, 29, 58, 0.85);
+  --lq-gallery-caption-color: #ffffff;
+  --lq-gallery-title-weight: 700;
+  --lq-gallery-meta-font: var(--rdk-font-title);
+  --lq-gallery-meta-size: 1.125rem;
+
+  --lq-chat-bubble-radius: 0px;
+  --lq-chat-bubble-padding: 6px 12px;
+  --lq-chat-bubble-font-size: 0.8125rem;
+
+  --lq-mail-folder-radius: 0;
+  --lq-mail-folder-size: 0.8125rem;
+
+  --lq-quickview-z-index: 2000;
+  --lq-card-maximized-z-index: 2000;
+
+  --lq-calendar-event-radius: 0;
+  --lq-calendar-event-bar: 4px;
+
+  /* Les grands titres des pages : le nom du CV, League Spartan 700 serré. */
+  --lq-error-code-size: 5.4rem;
+  --lq-error-code-weight: 700;
+  --lq-error-code-tracking: -0.01em;
+  --lq-error-title-size: 1.6875rem;
+  --lq-error-title-weight: 700;
+  --lq-lock-screen-name-size: 2.25rem;
+  --lq-lock-screen-name-weight: 700;
+  --lq-invoice-title-font: var(--rdk-font-title);
+  --lq-invoice-title-size: 3.25rem;
+  --lq-invoice-title-weight: 700;
+  --lq-invoice-title-tracking: -0.01em;
+  --lq-profile-name-size: 3.25rem;
+  --lq-profile-name-weight: 700;
+
+  --lq-transition-fast: 120ms ease;
+  --lq-transition-base: 200ms ease;
+}
+
+/* ---- surface claire : le CV ---- */
+
+.rdk.lq-root[data-lq-palette][data-lq-surface="light"] {
+  --lq-color-bg: #ebebeb;
+  --lq-color-panel: #ffffff;
+
+  --lq-color-text: #1b1d3a;
+  --lq-color-text-muted: #6b6f8a;
+  /* Variable de cette couche, lue par la vitrine : le texte fort, l'encre elle-même. */
+  --rdk-color-text-strong: #1b1d3a;
+  --lq-control-color: #1b1d3a;
+
+  --lq-color-border: #cfd2e3;
+  --lq-color-border-subtle: #e3e5f0;
+
+  --lq-color-accent: #3a41e2;
+  --lq-color-accent-contrast: #ffffff;
+  --lq-color-fill: #3a41e2;
+  --lq-color-fill-track: #cfd2e3;
+
+  --lq-color-focus-ring: rgba(58, 65, 226, 0.4);
+  --lq-color-hover: #eef0fb;
+  --lq-color-overlay: rgba(27, 29, 58, 0.55);
+
+  --lq-color-danger: #c4213a;
+  --lq-color-warning: #a8650a;
+  --lq-color-info: #3a41e2;
+  --lq-color-up: #2e9e5b;
+  --lq-color-down: #c4213a;
+
+  --lq-color-amber: #f2b705;
+  --lq-color-sky: #3a41e2;
+  --lq-color-green: #2e9e5b;
+  --lq-color-rose: #c4213a;
+  --lq-color-violet: #6b70f0;
+
+  /* Le CV flotte sur son fond avec une ombre large et douce ; les cartes, plus nombreuses, n'en
+     gardent qu'un souffle, et les modales l'ombre entière. */
+  --lq-shadow-panel: 0 1px 2px rgba(15, 18, 60, 0.06), 0 6px 18px rgba(15, 18, 60, 0.05);
+  --lq-color-panel-border: transparent;
+  --lq-shadow-modal: 0 12px 40px rgba(15, 18, 60, 0.18);
+
+  /* La barre haute : sur le papier, soulignée du filet bleu de 4 px qui court sous le titre du CV. */
+  --lq-header-bg: #ebebeb;
+  --lq-header-shadow: inset 0 -4px 0 #3a41e2;
+
+  --lq-table-stripe-bg: #f4f5fb;
+  --lq-table-hover-bg: #eef0fb;
+
+  --lq-radio-border-color: #9a9ec0;
+  --lq-slider-track-bg: #cfd2e3;
+  --lq-slider-thumb-bg: #ffffff;
+  --lq-slider-thumb-border: 2px solid #3a41e2;
+  --lq-slider-mark-color: #6b6f8a;
+  --lq-slider-tick-color: #cfd2e3;
+  --lq-tree-folder-color: #3a41e2;
+  --lq-progress-circle-color: #3a41e2;
+  --lq-progress-circle-track: #cfd2e3;
+  --lq-timeline-line: #3a41e2;
+  --lq-timeline-dot-color: #3a41e2;
+  --lq-timeline-marker-border: 3px solid #ebebeb;
+  --lq-activity-liked: #c4213a;
+  --lq-chat-bubble-mine-bg: #3a41e2;
+  --lq-chat-bubble-mine-color: #ffffff;
+  --lq-chat-bubble-mine-border: #3a41e2;
+  --lq-chat-bubble-theirs-bg: #eef0fb;
+  --lq-chat-bubble-theirs-color: #1b1d3a;
+  --lq-chat-bubble-theirs-border: #e3e5f0;
+  --lq-notes-paper: #ffffff;
+  --lq-mail-reader-bg: #ffffff;
+  --lq-mail-folder-active-bg: #eef0fb;
+  --lq-mail-folder-active-color: #3a41e2;
+  --lq-calendar-line: #e3e5f0;
+  --lq-calendar-today-bg: #eef0fb;
+  --lq-calendar-today-marker: #3a41e2;
+  --lq-calendar-today-marker-text: #ffffff;
+  --lq-bottom-nav-shadow: inset 0 4px 0 #3a41e2;
+  --lq-bottom-nav-border: 0 none;
+  --lq-color-warning-contrast: #1b1d3a;
+  --lq-button-group-selected-bg: #3a41e2;
+  --lq-button-group-selected-color: #ffffff;
+  --lq-button-group-selected-border: #3a41e2;
+}
+
+/* ---- surface sombre : la version nuit du site du CV ---- */
+
+.rdk.lq-root[data-lq-palette][data-lq-surface="dark"] {
+  --lq-color-bg: #14172e;
+  --lq-color-panel: #181b36;
+
+  --lq-color-text: #e4e6f5;
+  --lq-color-text-muted: #9a9ec0;
+  --rdk-color-text-strong: #f1f2fb;
+  --lq-control-color: var(--lq-color-text);
+
+  --lq-color-border: #3d4066;
+  --lq-color-border-subtle: #23274a;
+
+  --lq-color-accent: #7c82ff;
+  --lq-color-accent-contrast: #0d0f22;
+  --lq-color-fill: #7c82ff;
+  --lq-color-fill-track: #3d4066;
+
+  --lq-color-focus-ring: rgba(124, 130, 255, 0.45);
+  --lq-color-hover: #1b1e3d;
+  --lq-color-overlay: rgba(13, 15, 34, 0.7);
+
+  --lq-color-danger: #ef6b7b;
+  --lq-color-warning: #f2c94c;
+  --lq-color-info: #9ba0ff;
+  --lq-color-up: #4cc38a;
+  --lq-color-down: #ef6b7b;
+
+  --lq-color-amber: #f2c94c;
+  --lq-color-sky: #9ba0ff;
+  --lq-color-green: #4cc38a;
+  --lq-color-rose: #ef6b7b;
+  --lq-color-violet: #a5a9ff;
+
+  --lq-tone-accent: #5b61ea;
+  --lq-tone-info: #23274a;
+  --lq-tone-dark: #0d0f22;
+  --lq-tone-text: #ffffff;
+  --lq-tone-warning-text: #1b1d3a;
+
+  --lq-shadow-panel: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --lq-color-panel-border: #23274a;
+  --lq-shadow-modal: 0 12px 40px rgba(0, 0, 0, 0.5);
+
+  --lq-header-bg: #14172e;
+  --lq-header-shadow: inset 0 -4px 0 #7c82ff;
+
+  --lq-table-stripe-bg: rgba(255, 255, 255, 0.025);
+  --lq-table-hover-bg: #1b1e3d;
+
+  --lq-radio-border-color: #6b6f8a;
+  --lq-slider-track-bg: #3d4066;
+  --lq-slider-thumb-bg: #181b36;
+  --lq-slider-thumb-border: 2px solid #7c82ff;
+  --lq-slider-mark-color: #9a9ec0;
+  --lq-slider-tick-color: #3d4066;
+  --lq-tree-folder-color: #7c82ff;
+  --lq-progress-circle-color: #7c82ff;
+  --lq-progress-circle-track: #3d4066;
+  --lq-timeline-line: #7c82ff;
+  --lq-timeline-dot-color: #7c82ff;
+  --lq-timeline-marker-border: 3px solid #14172e;
+  --lq-activity-liked: #ef6b7b;
+  --lq-chat-bubble-mine-bg: #5b61ea;
+  --lq-chat-bubble-mine-color: #ffffff;
+  --lq-chat-bubble-mine-border: #5b61ea;
+  --lq-chat-bubble-theirs-bg: #1b1e3d;
+  --lq-chat-bubble-theirs-color: #e4e6f5;
+  --lq-chat-bubble-theirs-border: #23274a;
+  --lq-notes-paper: #181b36;
+  --lq-mail-reader-bg: #181b36;
+  --lq-mail-folder-active-bg: #1b1e3d;
+  --lq-mail-folder-active-color: #9ba0ff;
+  --lq-calendar-line: #23274a;
+  --lq-calendar-today-bg: #1b1e3d;
+  --lq-calendar-today-marker: #7c82ff;
+  --lq-calendar-today-marker-text: #0d0f22;
+  --lq-bottom-nav-shadow: inset 0 4px 0 #7c82ff;
+  --lq-bottom-nav-border: 0 none;
+  --lq-color-warning-contrast: #1b1d3a;
+  --lq-button-group-selected-bg: #7c82ff;
+  --lq-button-group-selected-color: #0d0f22;
+  --lq-button-group-selected-border: #7c82ff;
+}
+
+/* Dans une tuile pleine, le cercle de progression repasse dans l'encre du ton. */
+.rdk.lq-root [data-lq-tone] > * {
+  --lq-progress-circle-color: var(--lq-color-fill);
+  --lq-progress-circle-track: var(--lq-color-fill-track);
+}
+
+/* ---- la barre latérale : la colonne bleue du CV ---- */
+
+/* Pleine, en bleu, le texte en blanc — la colonne « Contact / Education / Languages » du CV. Le
+   kit marque la barre d'un `data-lq-region="sidebar"` : y redéfinir les couleurs suffit, logo,
+   navigation et pied lisent tous les mêmes variables. */
+.rdk.lq-root [data-lq-region="sidebar"] {
+  --lq-color-panel: #3a41e2;
+  --lq-color-text: #ffffff;
+  --lq-color-text-muted: rgba(255, 255, 255, 0.78);
+  --lq-color-border: rgba(255, 255, 255, 0.22);
+  --lq-color-border-subtle: transparent;
+  --lq-color-hover: #3238d0;
+  --lq-color-accent: #ffffff;
+  --lq-color-accent-contrast: #3a41e2;
+  --lq-color-focus-ring: rgba(255, 255, 255, 0.55);
+
+  --lq-sidebar-head-bg: #3238d0;
+  --lq-sidebar-head-border: #2c32c0;
+  --lq-sidebar-sub-bg: #2f35c9;
+}
+
+/* En version nuit, la colonne passe au bleu nuit du site, le bleu clair n'y tiendrait pas le
+   blanc. */
+.rdk.lq-root[data-lq-surface="dark"] [data-lq-region="sidebar"] {
+  --lq-color-panel: #1c1f5c;
+  --lq-color-text: #ffffff;
+  --lq-color-text-muted: #c3c6e0;
+  --lq-color-hover: #23277a;
+  --lq-color-accent: #ffffff;
+  --lq-color-accent-contrast: #1c1f5c;
+  --lq-sidebar-head-bg: #181b4f;
+  --lq-sidebar-head-border: #14174a;
+  --lq-sidebar-sub-bg: #181b4f;
+}
+
+/* La barre de tête du panneau latéral : la même colonne bleue. */
+.rdk [data-lq-region="quickview-head"] {
+  --lq-color-panel: #3a41e2;
+  --lq-color-text: #ffffff;
+  --lq-color-text-muted: rgba(255, 255, 255, 0.78);
+  --lq-color-border: rgba(255, 255, 255, 0.22);
+  --lq-color-border-subtle: transparent;
+  --lq-color-hover: #3238d0;
+  --lq-color-accent: #ffffff;
+}

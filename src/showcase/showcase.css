@@ -1,0 +1,1130 @@
+/* La mise en page de la vitrine — et **rien d'autre**.
+ *
+ * La frontière vaut d'être tenue : tout ce qui touche à l'apparence d'un composant appartient aux
+ * variables (`src/theme/resume.css`), et tout ce qui touche à la disposition d'un écran appartient
+ * ici. Le jour où une règle de ce fichier se met à viser un `.lq-…`, c'est le signe qu'elle visait
+ * en fait une variable manquante, ou une refonte d'anatomie à faire dans le kit.
+ *
+ * Tout est écrit avec les variables du thème, pas avec des valeurs en dur : la vitrine suit donc
+ * la surface claire comme la sombre sans une seule règle en double. */
+
+body {
+  margin: 0;
+}
+
+/* La marque. Dans la barre latérale elle prend le blanc de sa palette, dans la barre haute le texte
+   de la page : une seule règle, parce qu'elle lit la variable de l'endroit où elle est posée. */
+/* La marque, écrite comme le nom en tête du CV : League Spartan 700, serrée, en bleu. */
+.rdk-logo {
+  font-family: var(--rdk-font-title);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--lq-color-accent);
+}
+
+/* La barre haute : marque dans une colonne de 182 px, icônes d'action de
+   24 px séparées de 12, filets verticaux de part et d'autre, invite de recherche en 15 px. */
+.rdk-topbar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 59px;
+}
+
+.rdk-topbar__brand {
+  flex-shrink: 0;
+  width: 182px;
+  margin-left: 11px;
+}
+
+.rdk-topbar__icons {
+  display: flex;
+  align-items: center;
+  gap: var(--lq-space-3);
+  padding: 0 var(--lq-space-3) 0 var(--lq-space-5);
+  border-left: 1px solid var(--lq-color-border-subtle);
+  border-right: 1px solid var(--lq-color-border-subtle);
+}
+
+.rdk-topbar__icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  color: var(--lq-color-text);
+  background: none;
+  border: none;
+  border-radius: var(--lq-radius-md);
+  cursor: pointer;
+}
+
+.rdk-topbar__icon:hover {
+  color: var(--lq-color-accent);
+}
+
+/* La pastille : un point de danger cerclé du fond de la barre, accroché au coin de l'icône. */
+.rdk-topbar__bubble {
+  position: absolute;
+  top: -3px;
+  right: -4px;
+  width: 10px;
+  height: 10px;
+  background-color: var(--lq-color-danger);
+  border: 2px solid var(--lq-color-panel);
+  border-radius: 50%;
+}
+
+.rdk-topbar__search {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lq-space-2);
+  margin-left: 15px;
+  padding: 0;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--lq-color-text);
+  opacity: 0.77;
+  background: none;
+  border: none;
+  cursor: text;
+}
+
+.rdk-topbar__end {
+  display: flex;
+  align-items: center;
+  gap: var(--lq-space-4);
+  margin-left: auto;
+}
+
+.rdk-topbar__avatar {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Le point de présence, en bas à droite de l'avatar. */
+.rdk-topbar__status {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 10px;
+  height: 10px;
+  background-color: var(--lq-color-up);
+  border: 2px solid var(--lq-color-panel);
+  border-radius: 50%;
+}
+
+/* Une pile et une rangée, les deux seules dispositions dont les écrans ont besoin jusqu'ici. */
+.rdk-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lq-space-4);
+}
+
+.rdk-row {
+  display: flex;
+  align-items: center;
+  gap: var(--lq-space-2);
+}
+
+/* L'en-tête d'écran : 10 px entre un titre de section et son introduction, 30 px entre
+   l'introduction et ce qui suit. Les 30 px de marge autour du contenu sont ceux de la zone de contenu
+   du kit — l'écran n'en ajoute pas. */
+.rdk-screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lq-space-5);
+  max-width: 1280px;
+}
+
+.rdk-screen__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--lq-space-4);
+  margin-bottom: calc(var(--lq-space-6) - var(--lq-space-5));
+}
+
+.rdk-screen__titles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* `auto-fit` plutôt qu'un nombre de colonnes : la rangée de valeurs se replie d'elle-même, et une
+   tuile de plus dans l'écran ne demande pas de toucher à la feuille. */
+.rdk-grid {
+  display: grid;
+  gap: var(--lq-space-4);
+}
+
+.rdk-grid--stats {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.rdk-grid--forms {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  align-items: start;
+}
+
+.rdk-grid--tables {
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  align-items: start;
+}
+
+/* ---- les planches de composants (`Specimen.tsx`) ---- */
+
+.rdk-specimens {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: var(--lq-space-5);
+  align-items: start;
+}
+
+/* Un spécimen est un cadre de la vitrine, pas une `Card` du kit : il entoure le composant montré
+   sans prétendre en être un, et une `Card` montrée dans une `Card` se lirait double. Il reprend
+   pourtant l'anatomie d'une carte du thème : ombre et non bordure, angles droits, petit titre en
+   League Spartan sans filet dessous, corps à 20 px des bords. */
+.rdk-specimen {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--lq-color-panel);
+  border-radius: var(--lq-radius-lg);
+  box-shadow: var(--lq-shadow-panel);
+}
+
+.rdk-specimen--wide {
+  grid-column: 1 / -1;
+}
+
+.rdk-specimen__head {
+  padding: var(--lq-space-4) var(--lq-space-4) 7px var(--lq-space-5);
+}
+
+/* Le petit titre lit les variables `--lq-label-*` du thème : c'est la même voix que les en-têtes de
+   tableau et les titres de carte du kit, et elle change avec eux. */
+.rdk-specimen__name {
+  margin: 0;
+  font-family: var(--lq-label-font);
+  font-size: var(--lq-label-size);
+  font-weight: var(--lq-label-weight);
+  letter-spacing: var(--lq-label-tracking);
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: var(--rdk-color-text-strong);
+}
+
+.rdk-specimen__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lq-space-5);
+  padding: 10px var(--lq-space-5) var(--lq-space-5);
+  min-width: 0;
+  color: var(--rdk-color-text-strong);
+}
+
+.rdk-specimen__description {
+  margin: 0;
+  font-size: var(--lq-text-md);
+  line-height: var(--lq-line-height-body);
+}
+
+/* Une rangée qui se replie : plusieurs variantes d'un même composant côte à côte. */
+.rdk-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--lq-space-3);
+}
+
+@media (max-width: 640px) {
+  .rdk-specimens {
+    grid-template-columns: 1fr;
+  }
+
+  .rdk-screen__head {
+    flex-direction: column;
+  }
+}
+
+/* ---- écran « Pages et mises en page » ---- */
+
+/* Le cadre d'une page plein écran. Hauteur fixe et défilement propre : la page vit dedans au lieu
+   de pousser la coquille de la vitrine. `transform` en fait le bloc conteneur de ses éléments en
+   `position: fixed`, qui resteraient sinon accrochés à la fenêtre. */
+.rdk-page-frame {
+  position: relative;
+  height: 640px;
+  overflow: auto;
+  transform: translateZ(0);
+  border: 1px solid var(--lq-color-border);
+  border-radius: var(--lq-radius-md);
+}
+
+/* ---- écrans « Champs », « Dates et curseurs », « Retours » ---- */
+
+/* Une rangée de champs : chacun prend sa part de la largeur, alignés par le haut pour que l'aide
+   ou l'erreur sous l'un ne décale pas le libellé de l'autre. */
+.rdk-row--fill {
+  align-items: flex-start;
+}
+
+.rdk-row--fill > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* Le point d'ancrage d'un `Popover` : il épouse le bouton qu'il entoure. */
+.rdk-anchor {
+  display: inline-flex;
+}
+
+.rdk-popover-pad {
+  gap: var(--lq-space-3);
+  padding: var(--lq-space-3);
+  min-width: 260px;
+}
+
+/* Les cases filles d'une case parente, en retrait sous elle. */
+.rdk-indent {
+  gap: var(--lq-space-2);
+  padding-left: var(--lq-space-5);
+}
+
+.rdk-stack--tight {
+  gap: var(--lq-space-1);
+}
+
+.rdk-grow {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.rdk-grid--sliders {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--lq-space-5);
+}
+
+.rdk-grid--alerts {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  align-items: start;
+}
+
+/* ---- écrans « Primitives », « Conteneurs », « Icônes » ---- */
+
+/* Une rangée alignée par le haut : des onglets verticaux à côté de ce qu'ils commandent. */
+.rdk-row--top {
+  align-items: flex-start;
+  gap: var(--lq-space-4);
+}
+
+/* La zone qui reçoit le clic droit du spécimen `ContextMenu`. */
+.rdk-dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lq-space-3);
+  padding: var(--lq-space-3);
+  border: 1px dashed var(--lq-color-border);
+  border-radius: var(--lq-radius-md);
+}
+
+.rdk-grid--highlights {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--lq-space-5);
+}
+
+.rdk-wrap--baseline {
+  align-items: flex-end;
+}
+
+/* La grille des icônes : des cases étroites, le nom d'export dessous, coupé où il faut plutôt que
+   de déborder — certains noms dépassent vingt-cinq caractères. */
+.rdk-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  gap: var(--lq-space-2);
+}
+
+.rdk-icon-grid--compact {
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+}
+
+.rdk-icon-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--lq-space-2);
+  padding: var(--lq-space-3) var(--lq-space-2);
+  min-width: 0;
+  text-align: center;
+  color: var(--lq-color-text);
+  border-radius: var(--lq-radius-md);
+}
+
+.rdk-icon-cell:hover {
+  background: var(--lq-color-hover);
+}
+
+.rdk-icon-cell__name {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--lq-text-xs);
+  color: var(--lq-color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+/* Quatre tons pour montrer qu'une icône n'a pas de couleur à elle : elle prend celle du texte. */
+.rdk-tone {
+  display: inline-flex;
+}
+
+.rdk-tone--accent {
+  color: var(--lq-color-accent);
+}
+
+.rdk-tone--up {
+  color: var(--lq-color-up);
+}
+
+.rdk-tone--down {
+  color: var(--lq-color-down);
+}
+
+.rdk-tone--muted {
+  color: var(--lq-color-text-muted);
+}
+
+/* ---- Graphiques et Graphiques de marché (`screens/components/Charts.tsx`, `MarketCharts.tsx`) ---- */
+
+/* L'ancêtre positionné qu'exigent les bulles des graphiques composés à la main (`ChartTooltip`) et
+   l'infobulle d'évènement montrée seule (`ChartEventTooltip`). */
+.rdk-chart-host {
+  position: relative;
+  min-width: 0;
+}
+
+.rdk-chart-host--events {
+  min-height: 300px;
+}
+
+/* Une liste d'indicateurs : libellé, valeur, tendance — la cellule où vit une `Sparkline`. */
+.rdk-kpi-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.rdk-kpi-list__row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: var(--lq-space-4);
+  padding: var(--lq-space-2) 0;
+  border-bottom: 1px solid var(--lq-color-border-subtle);
+}
+
+.rdk-kpi-list__row:last-child {
+  border-bottom: 0;
+}
+
+/* ---- Widgets maison, Widgets outils, Cartes-audio-planning (`HomeWidgets`, `ToolWidgets`, `MapsAudio`) ----
+   Des fonds de scène et des cadres à hauteur fixe : plusieurs widgets se posent en surimpression
+   (épingles, dock, compteur d'images) ou remplissent leur parent (globe, carte), et ni l'un ni
+   l'autre ne se montre dans une boîte qui n'a que la hauteur de son contenu. */
+
+.rdk-align-start {
+  align-items: flex-start;
+}
+
+.rdk-align-end {
+  align-items: flex-end;
+}
+
+/* Une scène positionnée, pour les widgets qui se posent par-dessus une vue. */
+.rdk-stage {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+  border: 1px solid var(--lq-color-border-subtle);
+  border-radius: var(--lq-radius-md);
+  background: color-mix(in srgb, var(--lq-color-text) 4%, var(--lq-color-bg));
+}
+
+.rdk-stage--short {
+  height: 260px;
+}
+
+/* Un plan quadrillé, pour planter des épingles sur quelque chose. */
+.rdk-stage--plan {
+  background:
+    repeating-linear-gradient(0deg, color-mix(in srgb, var(--lq-color-text) 6%, transparent) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--lq-color-text) 6%, transparent) 0 1px, transparent 1px 28px),
+    color-mix(in srgb, var(--lq-color-text) 3%, var(--lq-color-bg));
+}
+
+.rdk-stage__block {
+  position: absolute;
+  border-radius: var(--lq-radius-sm);
+  background: color-mix(in srgb, var(--lq-color-text) 12%, var(--lq-color-bg));
+}
+
+.rdk-stage__pin {
+  position: absolute;
+  transform: translate(-50%, -100%);
+}
+
+.rdk-stage__corner {
+  position: absolute;
+}
+
+.rdk-stage__corner--tl {
+  left: var(--lq-space-3);
+  top: var(--lq-space-3);
+  align-items: flex-start;
+  gap: var(--lq-space-2);
+}
+
+.rdk-stage__corner--tr {
+  right: var(--lq-space-3);
+  top: var(--lq-space-3);
+}
+
+.rdk-stage__corner--bl {
+  left: var(--lq-space-3);
+  bottom: var(--lq-space-3);
+}
+
+.rdk-stage__caption {
+  position: absolute;
+  left: var(--lq-space-3);
+  bottom: var(--lq-space-2);
+  margin: 0;
+}
+
+/* Un cadre à hauteur fixe pour ce qui remplit son parent. */
+.rdk-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--lq-radius-md);
+}
+
+.rdk-frame--map {
+  height: 440px;
+  border: 1px solid var(--lq-color-border-subtle);
+  background: var(--lq-color-bg);
+}
+
+.rdk-frame--kb {
+  height: 520px;
+}
+
+.rdk-frame__overlay {
+  position: absolute;
+  top: var(--lq-space-4);
+  right: var(--lq-space-4);
+  width: 240px;
+}
+
+/* La carte et sa liste d'itinéraires, côte à côte. */
+.rdk-map {
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+  height: 420px;
+  border: 1px solid var(--lq-color-border-subtle);
+  border-radius: var(--lq-radius-md);
+  overflow: hidden;
+}
+
+.rdk-map__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lq-space-2);
+  padding: var(--lq-space-3);
+  border-right: 1px solid var(--lq-color-border-subtle);
+  background: var(--lq-color-panel);
+}
+
+/* ---- écran « Champs » : les champs à libellé intégré ----
+   Empilés à 10 px, plus serrés que les champs à libellé au-dessus. */
+.rdk-stack--inset,
+.rdk-row--inset {
+  gap: 10px;
+}
+
+/* La barre de chargement, posée sur le filet inférieur de la barre haute et de bord à bord : la
+   barre haute a 20 px de marge intérieure de chaque côté. La piste est rendue transparente par sa
+   variable, sur ce seul conteneur — seul le trait de l'accent doit se voir. */
+.rdk-topbar {
+  position: relative;
+}
+
+.rdk-route-progress {
+  position: absolute;
+  right: calc(-1 * var(--lq-space-5));
+  bottom: -1px;
+  left: calc(-1 * var(--lq-space-5));
+  --lq-color-fill-track: transparent;
+}
+
+/* ---- écran « Vue d'ensemble » : le tableau de bord ----
+   Les proportions, à 1 424 px : moitié gauche (grande tuile puis deux
+   cartes) contre une grille 2 × 2 de tuiles ; puis 3 / 4 / 3, 2 / 1, et 3 / 2,5 / 4. Les cartes y
+   sont séparées de 10 px, plus serré que les planches. */
+.rdk-dash {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 1360px;
+}
+
+.rdk-dash__row {
+  display: grid;
+  gap: 10px;
+  align-items: start;
+}
+
+.rdk-dash__row--head {
+  grid-template-columns: 1fr 1fr;
+}
+
+.rdk-dash__row--b {
+  grid-template-columns: 3fr 4fr 3fr;
+}
+
+.rdk-dash__row--c {
+  grid-template-columns: 2fr 1fr;
+}
+
+.rdk-dash__row--d {
+  grid-template-columns: 3fr 2.5fr 4fr;
+}
+
+.rdk-dash__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.rdk-dash__pair,
+.rdk-dash__quad {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  min-width: 0;
+}
+
+.rdk-dash__ring {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.rdk-dash__tickers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--lq-space-4);
+  margin-top: var(--lq-space-3);
+}
+
+.rdk-dash__ticker-line {
+  display: flex;
+  align-items: center;
+  gap: var(--lq-space-2);
+}
+
+.rdk-dash__symbol {
+  font-size: var(--lq-text-xs);
+  font-weight: var(--lq-font-weight-semibold);
+}
+
+.rdk-dash__small {
+  font-size: var(--lq-text-xs);
+}
+
+.rdk-dash__up {
+  color: var(--lq-color-up);
+}
+
+.rdk-dash__down {
+  color: var(--lq-color-down);
+}
+
+.rdk-dash__warn {
+  color: var(--lq-color-warning);
+}
+
+.rdk-dash__soft {
+  opacity: 0.76;
+}
+
+.rdk-dash__split {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--lq-space-3);
+}
+
+.rdk-dash__split--top {
+  align-items: flex-start;
+}
+
+.rdk-dash__green-title {
+  font-size: var(--lq-text-xl);
+  color: var(--lq-color-up);
+}
+
+.rdk-dash__accent-title {
+  font-size: var(--lq-text-h3);
+  font-weight: var(--lq-font-weight-heading);
+  color: var(--lq-color-accent);
+}
+
+.rdk-dash__total {
+  font-size: var(--lq-text-xl);
+}
+
+/* Le graphique déborde jusqu'aux bords de la carte, sous ses marges intérieures. */
+.rdk-dash__bleed {
+  margin: 0 calc(-1 * var(--lq-space-5)) calc(-1 * var(--lq-space-5));
+}
+
+.rdk-dash__sales {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--lq-space-3);
+  align-items: end;
+}
+
+.rdk-dash__sales p,
+.rdk-dash__weekly p,
+.rdk-dash__quotes p {
+  margin: 0 0 var(--lq-space-1);
+}
+
+.rdk-dash__sales .rdk-dash__plain-title {
+  margin-bottom: var(--lq-space-5);
+}
+
+.rdk-dash__amount {
+  font-size: var(--lq-text-h4);
+}
+
+.rdk-dash__amount small {
+  font-size: var(--lq-text-md);
+}
+
+.rdk-dash__bars {
+  min-width: 0;
+}
+
+.rdk-dash__tile-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lq-space-4);
+}
+
+.rdk-dash__tile-icon-box {
+  display: inline-flex;
+  padding: var(--lq-space-2);
+  background: color-mix(in srgb, currentColor 15%, transparent);
+}
+
+.rdk-dash__weather-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--lq-space-2);
+  height: 100%;
+  padding: var(--lq-tile-padding);
+}
+
+.rdk-dash__degrees {
+  font-size: 2.75rem;
+  font-weight: var(--lq-font-weight-heading);
+  line-height: 1;
+}
+
+.rdk-dash__today {
+  align-self: flex-start;
+  padding: 2px 5px;
+  font-family: var(--lq-label-font);
+  font-size: var(--lq-label-size);
+  font-weight: var(--lq-font-weight-semibold);
+  background: color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: var(--lq-radius-md);
+}
+
+.rdk-dash__quotes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lq-space-4);
+  padding: var(--lq-tile-padding);
+}
+
+.rdk-dash__quote-name {
+  font-size: var(--lq-text-lg);
+}
+
+.rdk-dash__weekly {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--lq-space-3);
+}
+
+.rdk-dash__value {
+  margin: 0 0 var(--lq-space-2);
+  font-size: var(--lq-text-h4);
+  font-weight: var(--lq-font-weight-heading);
+}
+
+.rdk-dash__pill {
+  padding: 2px 5px;
+  font-size: var(--lq-text-xs);
+  font-weight: var(--lq-font-weight-semibold);
+  background: color-mix(in srgb, currentColor 25%, transparent);
+  border-radius: var(--lq-radius-md);
+}
+
+.rdk-dash__inline-stats {
+  font-size: var(--lq-text-sm);
+}
+
+.rdk-dash__more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lq-space-2);
+  padding: 0;
+  font: inherit;
+  font-size: var(--lq-text-sm);
+  color: var(--lq-color-text);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.rdk-dash__chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--lq-color-border);
+  border-radius: 50%;
+  transition: transform var(--lq-transition-base);
+}
+
+.rdk-dash__chevron--open {
+  transform: rotate(180deg);
+}
+
+.rdk-dash__secret {
+  margin-top: auto;
+}
+
+.rdk-dash__secret-body {
+  padding-top: var(--lq-space-2);
+}
+
+.rdk-dash__dots {
+  letter-spacing: 0.1em;
+  color: var(--lq-color-text-muted);
+}
+
+.rdk-dash__tesla-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--lq-space-3);
+  margin-bottom: var(--lq-space-3);
+}
+
+.rdk-dash__company {
+  font-size: var(--lq-text-h3);
+  font-weight: var(--lq-font-weight-heading);
+}
+
+.rdk-dash__price {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--lq-space-2);
+  font-size: var(--lq-text-h3);
+}
+
+.rdk-dash__price small {
+  font-size: var(--lq-text-xs);
+}
+
+.rdk-dash__more-line {
+  display: flex;
+  align-items: center;
+  gap: var(--lq-space-2);
+  margin: var(--lq-space-3) 0 0;
+  font-size: var(--lq-text-sm);
+}
+
+.rdk-dash__link {
+  color: var(--lq-color-accent);
+}
+
+.rdk-dash__geo {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--lq-space-4);
+  margin: 0 calc(-1 * var(--lq-space-5)) calc(-1 * var(--lq-space-5)) 0;
+}
+
+.rdk-dash__geo-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lq-space-4);
+  padding-bottom: var(--lq-space-5);
+}
+
+.rdk-dash__server-stats {
+  display: flex;
+  gap: var(--lq-space-6);
+  margin-bottom: var(--lq-space-4);
+}
+
+.rdk-dash__server-stats div,
+.rdk-dash__page-stats div,
+.rdk-dash__page-name div {
+  display: flex;
+  flex-direction: column;
+}
+
+.rdk-dash__server-stats strong {
+  font-size: var(--lq-text-xl);
+  font-weight: var(--lq-font-weight-medium);
+}
+
+.rdk-dash__server-stats span {
+  font-size: var(--lq-text-xs);
+}
+
+.rdk-dash__quote {
+  margin: 0;
+  font-size: var(--lq-text-lg);
+}
+
+.rdk-dash__quote-values {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: var(--lq-text-xl);
+}
+
+.rdk-dash__page-name {
+  display: flex;
+  align-items: center;
+  gap: var(--lq-space-3);
+  margin-bottom: var(--lq-space-4);
+}
+
+.rdk-dash__eyebrow {
+  font-family: var(--lq-label-font);
+  font-size: var(--lq-label-size);
+  letter-spacing: var(--lq-label-tracking);
+  text-transform: uppercase;
+  color: var(--lq-color-text-muted);
+}
+
+.rdk-dash__page-stats {
+  display: flex;
+  gap: var(--lq-space-6);
+  margin-bottom: var(--lq-space-3);
+}
+
+.rdk-dash__weather-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rdk-dash__weather-head p {
+  margin: 0;
+}
+
+.rdk-dash__day {
+  font-size: var(--lq-text-h4);
+}
+
+.rdk-dash__hot {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lq-space-2);
+  font-size: var(--lq-text-h3);
+  color: var(--lq-color-down);
+}
+
+.rdk-dash__weather-title {
+  margin: var(--lq-space-5) 0 var(--lq-space-2);
+  padding-bottom: var(--lq-space-2);
+  border-bottom: 1px solid var(--lq-color-border-subtle);
+}
+
+.rdk-dash__weather-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--lq-space-5);
+}
+
+.rdk-dash__hours {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin-top: var(--lq-space-4);
+  text-align: center;
+}
+
+.rdk-dash__hours div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--lq-space-2);
+  padding: var(--lq-space-2) 0;
+  border-left: 1px solid var(--lq-color-border-subtle);
+}
+
+.rdk-dash__hours div:first-child {
+  border-left: none;
+}
+
+.rdk-dash__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--lq-space-4);
+  padding: var(--lq-space-6) 0 var(--lq-space-2);
+  font-size: var(--lq-text-xs);
+  color: var(--lq-color-text-muted);
+}
+
+@media (max-width: 1100px) {
+  .rdk-dash__row--head,
+  .rdk-dash__row--b,
+  .rdk-dash__row--c,
+  .rdk-dash__row--d {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rdk-dash__stock-value {
+  margin: var(--lq-space-2) 0 0;
+  font-size: var(--lq-text-sm);
+}
+
+/* ---- planches : les composants ajoutés en v0.186 ---- */
+
+/* Le champ de recherche d'une barre d'outils : une largeur à lui, la barre ne l'étire pas. */
+.rdk-toolbar-search {
+  width: 240px;
+}
+
+/* Une ligne de texte posée en haut d'une scène, au-dessus de ce qui flotte. */
+.rdk-stage__note {
+  margin: var(--lq-space-4);
+  font-size: var(--lq-text-sm);
+  color: var(--lq-color-text-muted);
+}
+
+/* Des curseurs verticaux côte à côte, alignés par le bas. */
+.rdk-wrap--sliders {
+  align-items: flex-end;
+  gap: var(--lq-space-6);
+}
+
+/* Les panneaux qui remplissent leur parent (messagerie, notes, boîte mail) : une hauteur à eux. */
+.rdk-frame--panel {
+  height: 520px;
+}
+
+.rdk-frame--notes {
+  height: 440px;
+}
+
+.rdk-frame--mail {
+  height: 620px;
+}
+
+.rdk-page-frame--short {
+  height: 460px;
+}
+
+/* Un téléphone, pour la navigation du bas : le contenu défile, la barre reste au pied. */
+.rdk-phone {
+  display: flex;
+  flex-direction: column;
+  width: 270px;
+  max-width: 100%;
+  height: 480px;
+  overflow: hidden;
+  background: var(--lq-color-bg);
+  border: 1px solid var(--lq-color-border-subtle);
+  border-radius: var(--lq-radius-lg);
+}
+
+.rdk-phone__screen {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--lq-space-3);
+  min-height: 0;
+  padding: var(--lq-space-4);
+  overflow: auto;
+}
+
+.rdk-phone__block {
+  flex: none;
+  height: 56px;
+  background: var(--lq-color-panel);
+  border-radius: var(--lq-radius-md);
+  box-shadow: var(--lq-shadow-panel);
+}
+
+/* ---- groupe « Applications » ---- */
+
+/* Un écran d'application en plein cadre (messagerie, boîte mail) : toute la hauteur que la barre
+   haute laisse à la zone de contenu, moins la marge de celle-ci en haut et en bas. La barre haute
+   mesure 60 px (59 plus son filet) ; la marge est celle de la zone de contenu du kit. */
+.rdk-app-fill {
+  --rdk-topbar-height: 60px;
+  height: calc(100dvh - var(--rdk-topbar-height) - 2 * var(--lq-space-6));
+  min-height: 480px;
+}
+
+/* Les écrans d'application prennent toute la largeur. */
+.rdk-screen--full {
+  max-width: none;
+}
+
+/* La frise et le fil, côte à côte tant que la largeur le permet. */
+.rdk-grid--feed {
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  align-items: start;
+}
+
+/* Les grands chiffres et intitulés du tableau de bord prennent la voix des titres du CV
+   (League Spartan) : sans elle, la chasse fixe du corps les étirait. */
+.rdk-dash__degrees,
+.rdk-dash__company,
+.rdk-dash__price,
+.rdk-dash__green-title,
+.rdk-dash__accent-title,
+.rdk-dash__total,
+.rdk-dash__amount,
+.rdk-dash__value,
+.rdk-dash__day,
+.rdk-dash__hot,
+.rdk-dash__plain-title,
+.rdk-dash__quote-name,
+.rdk-dash__stock-value {
+  font-family: var(--rdk-font-title);
+}

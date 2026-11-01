@@ -1,0 +1,3 @@
+/* Vide à dessein : dans le Storybook, `@michaelthomasjach/liseuse-dashboard-kit/style.css` pointe ici,
+   parce que le paquet y est remplacé par le source du kit, qui importe ses feuilles lui-même
+   (voir .storybook/main.ts). */

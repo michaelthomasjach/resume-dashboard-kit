@@ -1,0 +1,21 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { TOKEN_GROUPS, TokenTable } from "./_docs/TokenTable";
+
+<Meta title="Foundations/Variables du thème" />
+
+# Les variables du thème
+
+Chaque valeur ci-dessous est **lue dans le navigateur** sur une racine du thème (`getComputedStyle`), pas recopiée : la table montre ce que `src/theme/resume.css` pose réellement.
+
+Les valeurs sont celles du **CV de Michael Jach** (site et PDF A4), reprises de ses variables CSS : papier `#ebebeb`, encre `#1b1d3a` en Space Mono 13 px, gris `#6b6f8a`, accent bleu électrique `#3a41e2`, titres et intitulés en League Spartan 700, aucun arrondi, un filet bleu de 4 px sous la barre haute, la barre latérale en colonne bleue pleine. La surface sombre est la version nuit du site du CV (papier `#14172e`, panneau `#181b36`, accent `#7c82ff`).
+
+{TOKEN_GROUPS.map((g) => (
+  <section key={g.title} style={{ marginBottom: 40 }}>
+    <h2>{g.title}</h2>
+    <p>{g.note}</p>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+      <TokenTable tokens={g.tokens} surface="light" />
+      <TokenTable tokens={g.tokens} surface="dark" />
+    </div>
+  </section>
+))}
