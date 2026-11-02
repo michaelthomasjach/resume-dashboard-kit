@@ -64,9 +64,8 @@ détache du fond. Les petits titres (en-têtes de tableau, étiquettes) sont en 
 en-têtes de tableau dans le bleu de l'accent, comme les « Skills: » du CV.
 
 Les **graphiques** parlent la même langue (variables `--lq-chart-*` du kit, ≥ 0.189) : des traits
-de 2,5 px sur un quadrillage plein et fin, la ligne de base dans le bleu de l'accent en 3 px comme le
-filet du CV, les graduations et les légendes en capitales espacées (League Spartan pour les
-légendes), des barres et des pastilles sans arrondi, des séparateurs nets entre les parts d'un
+de 2,5 px sur un quadrillage plein et fin, les graduations et les légendes en capitales espacées
+(League Spartan pour les légendes) — les axes gardant la couleur par défaut —, des barres et des pastilles sans arrondi, des séparateurs nets entre les parts d'un
 anneau et les tuiles d'une carte de chaleur. Les six couleurs de séries restent distinctes : bleu,
 vert, ambre, puis le sarcelle `#0e7c86`, le rouge et le marine `#17324d` du CV.
 

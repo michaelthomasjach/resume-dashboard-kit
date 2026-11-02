@@ -201,21 +201,18 @@
   --lq-transition-base: 200ms ease;
 
   /* Graphiques (kit ≥ 0.189) — le langage de fiche technique du CV porté sur les données : des
-     traits francs de 2,5 px sur un quadrillage plein et fin, la ligne de base dans le bleu de
-     l'accent comme le filet sous le titre, les graduations et les légendes en capitales espacées
-     comme les intitulés du CV, aucun arrondi, des séparateurs nets entre les parts et les tuiles. */
+     traits francs de 2,5 px sur un quadrillage plein et fin, les graduations et les légendes en
+     capitales espacées comme les intitulés du CV, aucun arrondi, des séparateurs nets entre les
+     parts et les tuiles. Les axes (lignes et graduations) gardent la couleur par défaut du kit. */
   --lq-chart-line-width: 2.5px;
   --lq-chart-area-opacity: 0.14;
   --lq-chart-grid-color: var(--lq-color-border-subtle);
   --lq-chart-grid-width: 1px;
   --lq-chart-grid-dash: none;
-  --lq-chart-axis-color: var(--lq-color-text-muted);
   --lq-chart-axis-size: 10px;
   --lq-chart-axis-weight: 400;
   --lq-chart-axis-tracking: 0.02em;
   --lq-chart-axis-transform: uppercase;
-  --lq-chart-domain-color: var(--lq-color-accent);
-  --lq-chart-domain-width: 3px;
   --lq-chart-bar-radius: 0;
   --lq-chart-legend-font: var(--rdk-font-title);
   --lq-chart-legend-size: 11.5px;
