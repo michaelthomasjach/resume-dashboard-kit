@@ -109,6 +109,9 @@
   --lq-field-label-weight: 700;
 
   --lq-sidebar-z-index: 1950;
+  /* La barre haute passe au-dessus de tout le contenu (rail d'outils des graphiques à 1000, menus à 1200),
+     sous la barre latérale (1950), les modales (2000) et les popovers (2050). */
+  --lq-sticky-header-z-index: 1900;
   --lq-alloc-bar-border: none;
 
   /* Les tuiles pleines : le bleu du CV d'abord, puis une famille sobre qui ne le concurrence pas. */
