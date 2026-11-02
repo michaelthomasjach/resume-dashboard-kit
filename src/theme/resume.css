@@ -210,9 +210,9 @@
   --lq-chart-grid-width: 1px;
   --lq-chart-grid-dash: none;
   --lq-chart-axis-color: var(--lq-color-text-muted);
-  --lq-chart-axis-size: 10.5px;
+  --lq-chart-axis-size: 10px;
   --lq-chart-axis-weight: 400;
-  --lq-chart-axis-tracking: 0.08em;
+  --lq-chart-axis-tracking: 0.02em;
   --lq-chart-axis-transform: uppercase;
   --lq-chart-domain-color: var(--lq-color-accent);
   --lq-chart-domain-width: 3px;
@@ -231,6 +231,17 @@
   --lq-chart-node-radius: 0;
   --lq-chart-tile-gap-color: var(--lq-color-panel);
   --lq-chart-tile-gap-width: 2;
+  /* Le graphique boursier (canvas, kit ≥ 0.190) : les bougies de hausse dans le bleu du CV, celles
+     de baisse dans son rouge, des mèches de 1,5 px, des volumes en aplat léger ; le titre
+     (symbole · type) en League Spartan capitale, comme les intitulés du CV. */
+  --lq-chart-candle-up: var(--lq-color-accent);
+  --lq-chart-candle-down: var(--lq-color-danger);
+  --lq-chart-candle-wick-width: 1.5;
+  --lq-chart-volume-opacity: 0.3;
+  --lq-chart-title-font: var(--rdk-font-title);
+  --lq-chart-title-size: 13px;
+  --lq-chart-title-tracking: 0.06em;
+  --lq-chart-title-transform: uppercase;
 }
 
 /* ---- surface claire : le CV ---- */

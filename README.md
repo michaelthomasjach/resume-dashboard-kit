@@ -29,6 +29,8 @@ démonstration. Aucun composant n'est réécrit ici tant qu'une variable suffit 
 
 ![Graphiques : barres groupées, horizontales et signées, dessinées dans le style du CV](docs/images/graphiques.png)
 
+![Graphique boursier : bougies bleu et rouge du CV, volumes en aplat léger, quadrillage plein](docs/images/graphique-boursier.png)
+
 Les illustrations des écrans sont générées en code (SVG), aux couleurs du thème.
 
 ## Le style du CV
@@ -67,6 +69,10 @@ filet du CV, les graduations et les légendes en capitales espacées (League Spa
 légendes), des barres et des pastilles sans arrondi, des séparateurs nets entre les parts d'un
 anneau et les tuiles d'une carte de chaleur. Les six couleurs de séries restent distinctes : bleu,
 vert, ambre, puis le sarcelle `#0e7c86`, le rouge et le marine `#17324d` du CV.
+
+Le **graphique boursier** (kit ≥ 0.190), peint sur un canvas, suit le même thème : bougies de
+hausse dans le bleu du CV et de baisse dans son rouge, mèches de 1,5 px, volumes en aplat léger,
+quadrillage plein, et le titre (symbole · type) en League Spartan capitale.
 
 ## Utiliser le paquet
 
