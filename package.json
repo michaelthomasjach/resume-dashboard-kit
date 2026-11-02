@@ -1,6 +1,6 @@
 {
   "name": "@michaelthomasjach/resume-dashboard-kit",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Les composants de @michaelthomasjach/liseuse-dashboard-kit, habillés du style graphique du CV de Michael Jach : bleu électrique, Space Mono et League Spartan, angles droits. Surfaces claire et sombre.",
   "type": "module",
   "license": "UNLICENSED",
