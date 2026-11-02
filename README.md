@@ -27,6 +27,8 @@ démonstration. Aucun composant n'est réécrit ici tant qu'une variable suffit 
 
 ![Planche des champs : radios, curseurs, zone de texte, états d'erreur et de succès](docs/images/planche-champs.png)
 
+![Graphiques : barres groupées, horizontales et signées, dessinées dans le style du CV](docs/images/graphiques.png)
+
 Les illustrations des écrans sont générées en code (SVG), aux couleurs du thème.
 
 ## Le style du CV
@@ -58,6 +60,13 @@ La barre latérale est la colonne bleue pleine du CV ; la barre haute est posée
 soulignée du filet bleu de 4 px. Les cartes n'ont pas de bordure, un simple souffle d'ombre les
 détache du fond. Les petits titres (en-têtes de tableau, étiquettes) sont en League Spartan 700, les
 en-têtes de tableau dans le bleu de l'accent, comme les « Skills: » du CV.
+
+Les **graphiques** parlent la même langue (variables `--lq-chart-*` du kit, ≥ 0.189) : des traits
+de 2,5 px sur un quadrillage plein et fin, la ligne de base dans le bleu de l'accent en 3 px comme le
+filet du CV, les graduations et les légendes en capitales espacées (League Spartan pour les
+légendes), des barres et des pastilles sans arrondi, des séparateurs nets entre les parts d'un
+anneau et les tuiles d'une carte de chaleur. Les six couleurs de séries restent distinctes : bleu,
+vert, ambre, puis le sarcelle `#0e7c86`, le rouge et le marine `#17324d` du CV.
 
 ## Utiliser le paquet
 
